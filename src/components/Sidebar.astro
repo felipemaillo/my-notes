@@ -10,13 +10,13 @@
   </div>
 
   <div id="notes-list" class="notes-list">
-    <div class="note-item">Nota 1</div>
-    <div class="note-item">Nota 2</div>
   </div>
 </aside>
 
 <script>
+  import { ulid } from 'ulid';
   import { createIcons, Trash, FilePlus } from 'lucide';
+  import { removeNote } from '../functions/notes';
 
   createIcons({
     icons: {
@@ -24,6 +24,16 @@
       FilePlus,
     },
   });
+
+  document.getElementById('new-note')?.addEventListener('click', () => {
+    const noteId = ulid();
+    window.location.hash = noteId;
+    window.location.reload();
+  })
+
+  document.getElementById('remove-note')?.addEventListener('click', () => {
+     removeNote();
+  })
 </script>
 
 <style>
@@ -35,7 +45,7 @@
 
   .sidebar {
     width: 250px;
-    background-color: color-mix(in srgb, var(--color-primary) 30%, (--color-bg));
+    background-color: color-mix(in srgb, var(--color-primary) 30%, var(--color-bg));
     border-right: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
@@ -79,7 +89,7 @@
     overflow-y: auto;
   }
 
-  .note-item {
+  :global(.note-item) {
     padding: 0.75rem 1rem;
     border-bottom: 1px solid var(--border-color);
     cursor: pointer;
@@ -97,7 +107,7 @@
     }
 
     &.active {
-      font-weight: 600;
+      font-weight: 500;
     }
   }
 </style>

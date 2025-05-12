@@ -2,6 +2,46 @@
   <div id="editor-container"></div>
 </div>
 
+<script>
+  import { Editor } from '@tiptap/core';
+  import StarterKit from '@tiptap/starter-kit';
+  import Image from '@tiptap/extension-image';
+  import { getNoteId, updateNotesList } from '../functions/notes';
+
+  const noteId = getNoteId();
+  const storageKey = `note-${noteId}`;
+  new Editor({
+    element: document.querySelector('#editor-container')!,
+    extensions: [
+      StarterKit,
+      Image.configure({
+        allowBase64: true,
+        inline: true,
+      }),
+    ],
+    content: localStorage.getItem(storageKey) || '<h1>Nova nota</h1>',
+    autofocus: true,
+    onUpdate: ({ editor }) => {
+      fistLineIsH1(editor);
+
+      const content = editor.getHTML();
+      localStorage.setItem(storageKey, content); // salva o conteúdo do editor no local storage a cada edição
+      updateNotesList();
+    },
+  });
+
+  function fistLineIsH1(editor: Editor) {
+    const json = editor.getJSON();
+
+    if (json.content && json.content.length > 0 && json.content[0].type !== 'heading') {
+      editor.commands.setNodeSelection(0);
+      editor.commands.toggleHeading({ level: 1 });
+    }
+  }
+
+  updateNotesList();
+</script>
+
 <style>
   .editor_area {
     flex: 1;
@@ -14,5 +54,38 @@
   #editor-container {
     flex: 1;
     padding: 0 15vw;
+  }
+
+  /* TipTap */
+  :global(.ProseMirror) {
+    outline: none;
+    min-width: 200px;
+  }
+
+  :global(.ProseMirror p) {
+    margin: 0.5em 0;
+  }
+  :global(.ProseMirror h1, .ProseMirror h2, .ProseMirror h3) {
+    margin: 1em 0 0.5em;
+  }
+
+  :global(.ProseMirror ul, .ProseMirror ol) {
+    padding-left: 1.5em;
+  }
+
+  :global(.ProseMirror blockquote) {
+    border-left: 3px solid var(--border-color);
+    padding-left: 1em;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  :global(.ProseMirror hr) {
+    border-color: var(--border-color);
+  }
+
+  :global(.ProseMirror img) {
+    max-width: 100%;
+    height: auto;
   }
 </style>
