@@ -983,12 +983,6 @@ packages:
         integrity: sha512-wIX2aSZL5FE+MR0JlvF87BNVrtFWf6AE6rxSE9X7OwnVvoyCQjpzSRJ+M87se/4QCkCiebQAqrJ0y6fwIyi7nw==,
       }
 
-  '@types/prismjs@1.26.5':
-    resolution:
-      {
-        integrity: sha512-AUZTa7hQ2KY5L7AmtSiqxlhWxb4ina0yd8hNbl4TWuqnv/pFP0nDMb3YrfSBf4hJVGLh2YEIBfKaBW/9UEl6IQ==,
-      }
-
   '@types/unist@3.0.3':
     resolution:
       {
@@ -2129,13 +2123,6 @@ packages:
       }
     engines: { node: ^10 || ^12 || >=14 }
 
-  prismjs@1.30.0:
-    resolution:
-      {
-        integrity: sha512-DEvV2ZF2r2/63V+tK8hQvrR2ZGn10srHbXviTlcv7Kpzw8jWiNTqbVgjO3IY8RxrrOUF8VPMQQFysYYYv0YZxw==,
-      }
-    engines: { node: '>=6' }
-
   prompts@2.4.2:
     resolution:
       {
@@ -2927,7 +2914,6 @@ snapshots:
   '@astrojs/markdown-remark@6.3.1':
     dependencies:
       '@astrojs/internal-helpers': 0.6.1
-      '@astrojs/prism': 3.2.0
       github-slugger: 2.0.0
       hast-util-from-html: 2.0.3
       hast-util-to-text: 4.0.2
@@ -2949,10 +2935,6 @@ snapshots:
       vfile: 6.0.3
     transitivePeerDependencies:
       - supports-color
-
-  '@astrojs/prism@3.2.0':
-    dependencies:
-      prismjs: 1.30.0
 
   '@astrojs/telemetry@3.2.1':
     dependencies:
@@ -3427,8 +3409,6 @@ snapshots:
   '@types/node@22.15.17':
     dependencies:
       undici-types: 6.21.0
-
-  '@types/prismjs@1.26.5': {}
 
   '@types/unist@3.0.3': {}
 
@@ -4330,8 +4310,6 @@ snapshots:
       nanoid: 3.3.11
       picocolors: 1.1.1
       source-map-js: 1.2.1
-
-  prismjs@1.30.0: {}
 
   prompts@2.4.2:
     dependencies:
