@@ -6,6 +6,7 @@
   import { Editor } from '@tiptap/core';
   import StarterKit from '@tiptap/starter-kit';
   import Image from '@tiptap/extension-image';
+  import YouTube from '@tiptap/extension-youtube';
   import { getNoteId, updateNotesList } from '../functions/notes';
 
   const noteId = getNoteId();
@@ -17,6 +18,10 @@
       Image.configure({
         allowBase64: true,
         inline: true,
+      }),
+      YouTube.configure({
+        controls: true,
+        allowFullscreen: true,
       }),
     ],
     content: localStorage.getItem(storageKey) || '<h1>Nova nota</h1>',
