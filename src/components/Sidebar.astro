@@ -11,17 +11,27 @@
 
   <div id="notes-list" class="notes-list">
   </div>
+  <div class="sidebar-footer">
+    <button id="light-mode" class="light-mode-btn" title="Modo Claro" aria-label="Modo Claro">
+      <i data-lucide="sun"></i>
+    </button>
+    <button id="dark-mode" class="dark-mode-btn" title="Modo Escuro" aria-label="Modo Escuro">
+      <i data-lucide="Moon"></i>
+    </button>
+  </div>
 </aside>
 
 <script>
   import { ulid } from 'ulid';
-  import { createIcons, Trash, FilePlus } from 'lucide';
+  import { createIcons, Trash, FilePlus, Sun, Moon } from 'lucide';
   import { removeNote } from '../functions/notes';
 
   createIcons({
     icons: {
       Trash,
       FilePlus,
+      Sun,
+      Moon,
     },
   });
 
@@ -34,15 +44,17 @@
   document.getElementById('remove-note')?.addEventListener('click', () => {
      removeNote();
   })
+
+  document.getElementById('light-mode')?.addEventListener('click', () => {
+     document.documentElement.classList.add('light')
+  })
+
+  document.getElementById('dark-mode')?.addEventListener('click', () => {
+     document.documentElement.classList.remove('light')
+  })
 </script>
 
 <style>
-  p {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--color-text);
-  }
-
   .sidebar {
     width: 250px;
     background-color: color-mix(in srgb, var(--color-primary) 30%, var(--color-bg));
@@ -55,6 +67,20 @@
   .sidebar-header {
     padding: 1rem;
     border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    & p {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--color-text);
+    }
+  }
+
+  .sidebar-footer {
+    padding: 1rem;
+    border-top: 1px solid var(--border-color);
     display: flex;
     align-items: center;
     justify-content: space-between;

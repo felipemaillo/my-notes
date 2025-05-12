@@ -7,6 +7,7 @@
   import StarterKit from '@tiptap/starter-kit';
   import Image from '@tiptap/extension-image';
   import YouTube from '@tiptap/extension-youtube';
+  import CodeBlock from '@tiptap/extension-code-block';
   import { getNoteId, updateNotesList } from '../functions/notes';
 
   const noteId = getNoteId();
@@ -22,6 +23,9 @@
       YouTube.configure({
         controls: true,
         allowFullscreen: true,
+      }),
+      CodeBlock.configure({
+        exitOnTripleEnter: true,
       }),
     ],
     content: localStorage.getItem(storageKey) || '<h1>Nova nota</h1>',
@@ -92,5 +96,33 @@
   :global(.ProseMirror img) {
     max-width: 100%;
     height: auto;
+  }
+
+  /* Estilos para o Code Block */
+  :global(.ProseMirror pre) {
+    background-color: color-mix(in srgb, rgb(255 255 255 / 0.3), var(--color-bg));
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem 0;
+    font-family: 'Monaco', 'Courier New', Roboto, monospace;
+    font-size: 0.9em;
+    overflow-x: auto;
+  }
+
+  :global(.ProseMirror pre code) {
+    color: var(--color-text);
+    padding: 0;
+    background: none;
+    font-size: inherit;
+  }
+
+  :global(.ProseMirror code) {
+    color: var(--color-text);
+    font-size: 0.9em;
+    font-family: 'Monaco', 'Courier New', Roboto, monospace;
+    background-color: transparent;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
   }
 </style>
